@@ -294,39 +294,21 @@ for team in range(24):
     if(teamA[team, 14, 9] == 0):   teamA[team, 14, 13] = 0
     else:   teamA[team, 14, 13] = "{:.2f}".format(float((teamA[team, 14, 11] - teamA[team, 14, 10])*100 / teamA[team, 14, 9]))
 
-A = pd.DataFrame({'Nazwisko':playersA[1, :], 'Pozycja':posA[1, :], ' ':emptyA, 'Suma PKT':teamA[1, :,0].astype(int), 'Bilans':teamA[1, :,1].astype(int), ' ':emptyA, 'Zagrywki':teamA[1, :,2].astype(int),
-    'Błędy':teamA[1, :,3].astype(int), 'Asy':teamA[1, :,4].astype(int), 'Eff %':teamA[1, :,5], ' ':emptyA, 'Przyjęcia':teamA[1, :,6].astype(int), 'Błędów':teamA[1, :,7].astype(int),
-    'Perf%':teamA[1, :,8], ' ':emptyA, 'Ataki':teamA[1, :,9].astype(int), 'Bł/Bl':teamA[1, :,10].astype(int), 'Pkt':teamA[1, :,11].astype(int), 'Skut%':teamA[1, :,12],
-    'Eff%':teamA[1, :,13], ' ':emptyA, 'Bloki':teamA[1, :,14].astype(int), 'Wybloki':teamA[1, :,15].astype(int), ' ':emptyA, 'Obrony':teamA[1, :,16].astype(int), ' ':emptyA, 'Przyj. pos':teamA[1, :,17].astype(int)},
-    columns = ['Nazwisko','Pozycja', ' ', 'Suma PKT', 'Bilans', ' ', 'Zagrywki', 'Błędy', 'Asy', 'Eff %', ' ', 'Przyjęcia', 'Błędów', 'Perf%', ' ', 'Ataki', 'Bł/Bl', 'Pkt', 'Skut%', 'Eff%', ' ', 'Bloki', 'Wybloki', ' ', 'Obrony', ' ', 'Przyj. pos']).set_index(numbersA[1, :].astype(int))
 
-"""
-#transform into dataframe
-A = pd.DataFrame({'Nazwisko':playersA, 'Pozycja':posA, ' ':emptyA, 'Suma PKT':teamA[:,0].astype(int), 'Bilans':teamA[:,1].astype(int), ' ':emptyA, 'Zagrywki':teamA[:,2].astype(int),
-    'Błędy':teamA[:,3].astype(int), 'Asy':teamA[:,4].astype(int), 'Eff %':teamA[:,5], ' ':emptyA, 'Przyjęcia':teamA[:,6].astype(int), 'Błędów':teamA[:,7].astype(int),
-    'Perf%':teamA[:,8], ' ':emptyA, 'Ataki':teamA[:,9].astype(int), 'Bł/Bl':teamA[:,10].astype(int), 'Pkt':teamA[:,11].astype(int), 'Skut%':teamA[:,12],
-    'Eff%':teamA[:,13], ' ':emptyA, 'Bloki':teamA[:,14].astype(int), 'Wybloki':teamA[:,15].astype(int), ' ':emptyA, 'Obrony':teamA[:,16].astype(int)},
-    columns = ['Nazwisko','Pozycja', ' ', 'Suma PKT', 'Bilans', ' ', 'Zagrywki', 'Błędy', 'Asy', 'Eff %', ' ', 'Przyjęcia', 'Błędów', 'Perf%', ' ', 'Ataki', 'Bł/Bl', 'Pkt', 'Skut%', 'Eff%', ' ', 'Bloki', 'Wybloki', ' ', 'Obrony']).set_index(numbersA)
+# Create a Pandas Excel writer using XlsxWriter as the engine.
+writer = pd.ExcelWriter('multi_sheet.xlsx', engine='xlsxwriter')
 
-B = pd.DataFrame({'Nazwisko':playersA, 'Pozycja':posA, ' ':emptyB, 'Suma PKT':teamA[:,0].astype(int), 'Bilans':teamA[:,1].astype(int), ' ':emptyB, 'Zagrywki':teamA[:,2].astype(int),
-    'Błędy':teamA[:,3].astype(int), 'Asy':teamA[:,4].astype(int), 'Eff %':teamA[:,5], ' ':emptyB, 'Przyjęcia':teamA[:,6].astype(int), 'Błędów':teamA[:,7].astype(int),
-    'Perf%':teamA[:,8], ' ':emptyB, 'Ataki':teamA[:,9].astype(int), 'Bł/Bl':teamA[:,10].astype(int), 'Pkt':teamA[:,11].astype(int), 'Skut%':teamA[:,12],
-    'Eff%':teamA[:,13], ' ':emptyB, 'Bloki':teamA[:,14].astype(int), 'Wybloki':teamA[:,15].astype(int), ' ':emptyB, 'Obrony':teamA[:,16].astype(int)},
-    columns = ['Nazwisko','Pozycja', ' ', 'Suma PKT', 'Bilans', ' ', 'Zagrywki', 'Błędy', 'Asy', 'Eff %', ' ', 'Przyjęcia', 'Błędów', 'Perf%', ' ', 'Ataki', 'Bł/Bl', 'Pkt', 'Skut%', 'Eff%', ' ', 'Bloki', 'Wybloki', ' ', 'Obrony']).set_index(numbersA)
+for team in range(24):
+    
+    A = pd.DataFrame({'Nazwisko':playersA[team, :], 'Pozycja':posA[team, :], 'Suma PKT':teamA[team, :,0].astype(int), 'Bilans':teamA[team, :,1].astype(int), 'Zagrywki':teamA[team, :,2].astype(int),
+    'Błędy':teamA[team, :,3].astype(int), 'Asy':teamA[team, :,4].astype(int), 'Eff %':teamA[team, :,5], 'Przyjęcia':teamA[team, :,6].astype(int), 'Przyj. pos':teamA[team, :,17].astype(int), 'Błędów':teamA[team, :,7].astype(int),
+    'Perf%':teamA[team, :,8], 'Ataki':teamA[team, :,9].astype(int), 'Bł/Bl':teamA[team, :,10].astype(int), 'Pkt':teamA[team, :,11].astype(int), 'Skut%':teamA[team, :,12],
+    'Eff%':teamA[team, :,13], 'Bloki':teamA[team, :,14].astype(int), 'Wybloki':teamA[team, :,15].astype(int), 'Obrony':teamA[team, :,16].astype(int)},
+    columns = ['Nazwisko','Pozycja', 'Suma PKT', 'Bilans', 'Zagrywki', 'Błędy', 'Asy', 'Eff %', 'Przyjęcia', 'Przyj. pos', 'Błędów', 'Perf%', 'Ataki', 'Bł/Bl', 'Pkt', 'Skut%', 'Eff%', 'Bloki', 'Wybloki', 'Obrony']).set_index(numbersA[team, :].astype(int))
 
-"""
+    A.to_excel(writer, sheet_name=teamslist[team])
 
+writer.save()
 
-#exporting dataframes to .png images
-#nameA = match + '_' + set + '_' + 'A.png'      
-#nameB = match + '_' + set + '_' + 'B.png'
-dfi.export(A, "test.png")
-#   dfi.export(B, nameB)
 
 driver.close()
-
-
-
-
-###########
-# dodać poprawne przyjęcia i poprawić % przyjęcia zagrywki, bo jest obliczane z poprawnych przyjęć z jednego meczu
