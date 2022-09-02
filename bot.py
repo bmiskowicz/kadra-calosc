@@ -8,7 +8,6 @@ from selenium.webdriver.common.by import By
 import numpy as np
 import pandas as pd
 import time
-import dataframe_image as dfi
 
 
           
